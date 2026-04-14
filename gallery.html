@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <h2 style="text-align: center; color: white;">My Gallery</h2>
+    <div class="gallery">
+        <div class="eachImage fade">
+            <div class="picture-no">1/6</div>
+            <img src="images/arthur-rachbauer.jpg" alt="Flower">
+            <div class="caption">Beatiful flower</div>
+        </div>
+        <div class="eachImage fade">
+            <div class="picture-no">2/6</div>
+            <img src="images/artiom-vallat.jpg" alt="Ice-trees">
+            <div class="caption">Iccy view</div>
+        </div>
+        <div class="eachImage fade">
+            <div class="picture-no">3/6</div>
+            <img src="images/cute-fox.jpg" alt="cute-fox">
+            <div class="caption">Wild life</div>
+        </div>
+        <div class="eachImage fade">
+            <div class="picture-no">4/6</div>
+            <img src="images/dog.jpg" alt="dog">
+            <div class="caption">Domestic dog</div>
+        </div>
+        <div class="eachImage fade">
+            <div class="picture-no">5/6</div>
+            <img src="images/hugo-jutea.jpg" alt="night light">
+            <div class="caption">Night time sky</div>
+        </div>
+        <div class="eachImage fade">
+            <div class="picture-no">6/6</div>
+            <img src="images/zetong-li.jpg" alt="dawn">
+            <div class="caption">Dusk view from bridge</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <div style="text-align: center;">
+         <span class="dot" onclick="currentSlide(1)"></span>
+         <span class="dot" onclick="currentSlide(2)"></span>
+         <span class="dot" onclick="currentSlide(3)"></span>
+         <span class="dot" onclick="currentSlide(4)"></span>
+         <span class="dot" onclick="currentSlide(5)"></span>
+         <span class="dot" onclick="currentSlide(6)"></span>
+    </div>
+
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("eachImage");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        }
+
+    </script>
+
+</body>
+</html>
