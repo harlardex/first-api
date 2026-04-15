@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="table.css">
+</head>
+<body>
+    <h2>Unknown Store</h2>
+    <div>
+        <table id="products">
+            <tr class="table-head">
+                <th>Product Name</th>
+                <th>Product Brand</th>
+                <th>Category</th>
+                <th>Price($)</th>
+                <th>Description</th> 
+                <th>Ratings</th>
+                <th>Color</th>
+                <th>Purchase</th>
+            </tr>
+            <tr class="items">
+                <td>iphone 17 pro-max</td>
+                <td>Apple</td>
+                <td>Electronics</td>
+                <td>$1,000</td>
+                <td>The latest iphone in town</td>
+                <td>4.5</td>
+                <td>Orange</td>
+                <td><button>Buy now</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const BASE_URL = 'https://fakeapi.net';
+        let finalUrl = BASE_URL + '/products';
+
+        const fetchProducts = async() => {
+            try {
+                const response = await fetch(finalUrl);
+                // console.log(response);
+            
+            if (!response.ok){
+                throw new Error (`HTTPS error! status: ${response.status}`)
+            }
+            const products = await response.json();
+            console.log(`products`, products) ;
+            const productData = products.data;
+            console.log(`productData`, productData)
+
+            const productContainer = document.getElementById('products')
+             productData.forEach((product) => {
+                    const productElement = document.createElement('tr');
+                    productElement.classList.add('items');
+                    productElement.innerHTML = `
+                                        <td>${product.title}</td>
+                                        <td>${product.brand}</td>
+                                        <td>${product.category}</td>
+                                        <td>$${product.price}</td>
+                                        <td>${product.description}</td>
+                                        <td>${product.rating.rate}</td>
+                                        <td>${product.specs.color}</td>
+                                        <td><button>Buy now</button></td>
+                                        `
+                    productContainer.appendChild(productElement);
+             });
+        }
+            catch (error){
+                console.error(`Error fetching products`, error);
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+        });
+
+    </script>
+</body>
+</html>
